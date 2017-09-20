@@ -10,12 +10,6 @@ import { REQUEST_LINKS_SUCCEEDED,
 
 const initialState = fromJS({
   links: [
-    {
-      description: 'tsdf',
-      url: 'url',
-      topicName: 'ndsf',
-      id: 'fake',
-    },
   ],
 });
 
