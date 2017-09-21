@@ -25,13 +25,16 @@ export function* fetchTopicsSaga() {
 }
 
 function* pushTopic(action) {
-  window.location.assign((`/topics/${action.topic.name}`), false);
-  //put(push(`/topics/${action.topic.name}`));
-  //TODO: figure out why put(push) doesn't work.
+  //window.location.assign((`/topics/${action.topic.name}`), false);
+  yield put(push(`/topics/${action.topic.name}`));
 }
 
 export function* selectTopicSaga() {
   yield* takeLatest(SELECT_TOPIC, pushTopic);
+  if (!state.selectedTopic && state.routerLocation === '/'){
+    yield put(push(`/topics/${state.topics[0].name}`));
+
+  }
 }
 
 // All sagas to be loaded

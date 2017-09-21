@@ -1,6 +1,7 @@
 /*eslint-disable */
 import { call, put } from 'redux-saga/effects';
-import { REQUEST_LINKS } from './constants';
+import { push } from 'react-router-redux';
+import { REQUEST_LINKS, START_ADD } from './constants';
 import { takeLatest } from 'redux-saga';
 import { requestLinkSucceded, requestLinkFailed } from './actions';
 
@@ -19,12 +20,21 @@ function* fetchLinks(action) {
   }
 }
 
+function* startAdd(action){
+  yield put(push(`/topics/${action.topicName}/add`));
+}
+
 // Individual exports for testing
 export function* fetchLinksSaga() {
   yield* takeLatest(REQUEST_LINKS, fetchLinks);
 }
 
+export function* startAddSaga(){
+  yield* takeLatest(START_ADD, startAdd);
+
+}
 // All sagas to be loaded
 export default [
   fetchLinksSaga,
+  startAddSaga,
 ];
